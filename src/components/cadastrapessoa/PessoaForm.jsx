@@ -99,7 +99,7 @@ function PessoaForm() {
             <Input placeholder="exemplo@email.com" />
           </Form.Item>
 
-          <BuscaCepForm />
+          <BuscaCepForm form={form} />
           <TelefoneList form={form} />
 
           {tipo === 'PF' ? <PFForm /> : <PJForm />}
