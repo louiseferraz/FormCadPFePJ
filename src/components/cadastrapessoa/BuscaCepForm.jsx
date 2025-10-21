@@ -77,11 +77,9 @@ export default function BuscaCEPForm({ form }) {
         rules={[{ required: true, message: "Informe o CEP!" }]}
       >
         <Input
-          // value={endereco.cep}
           onChange={(e) => buscarCEP(e.target.value)}
-          //onBlur={(e) => buscarCEP(e.target.value)}
           placeholder="Ex: 01001-000"
-          maxLength={9}
+          maxLength={8}
         />
       </Form.Item>
       <Form.Item
