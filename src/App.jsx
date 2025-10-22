@@ -9,7 +9,7 @@ import PessoaFormOO from './components/cadastrapessoa/PessoaFormOO.jsx';
 function App() {
   return (
     <>
-      <PessoaFormOO />
+      <PessoaForm />
     </>
   );
 }
