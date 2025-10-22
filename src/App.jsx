@@ -4,11 +4,12 @@
 //import Login from "./components/tailwind/Login.jsx"
 //import Login from "./components/antd/Login.jsx"
 import PessoaForm from './components/cadastrapessoa/PessoaForm.jsx';
+import PessoaFormOO from './components/cadastrapessoa/PessoaFormOO.jsx';
 
 function App() {
   return (
     <>
-      <PessoaForm />
+      <PessoaFormOO />
     </>
   );
 }
