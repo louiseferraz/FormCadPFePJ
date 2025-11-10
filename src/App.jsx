@@ -7,14 +7,17 @@
 //import PessoaForm from "./components/cadastrapessoa/PessoaFormOO.jsx"
 
 // necessário apenas a partir da utilização de rotas para outras telas
-//import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 //import AppRoutes from "./routes/AppRoutes.jsx";
-import AppRoutes from "./routes/AppRoutesV2";
-
+import AppRoutes from "./routes/AppRoutesV2.jsx";
 
 function App() {
-  return <AppRoutes />;
+
+  return (
+    <Router>
+      <AppRoutes />
+    </Router>
+  )
 }
 
-
-export default App;
+export default App

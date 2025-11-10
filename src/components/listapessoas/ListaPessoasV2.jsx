@@ -5,38 +5,31 @@ import { useNavigate } from "react-router-dom";
 import PFDAO from "../../objetos/dao/PFDAOLocalV2.mjs";
 import PJDAO from "../../objetos/dao/PJDAOLocalV2.mjs";
 
-
 export default function ListaPessoas() {
   const navigate = useNavigate();
-
 
   const [tipo, setTipo] = useState("PF");
   const [filtroNome, setFiltroNome] = useState("");
   const [dados, setDados] = useState([]);
 
-
   const pfDAO = new PFDAO();
   const pjDAO = new PJDAO();
 
-
+  // 🔹 Atualiza a lista conforme o tipo ou filtro
   function carregarLista() {
     const dao = tipo === "PF" ? pfDAO : pjDAO;
     const lista = dao.listar();
-
 
     const filtrados = lista.filter((p) =>
       p.nome?.toLowerCase().includes(filtroNome.toLowerCase())
     );
 
-
     setDados(filtrados);
   }
-
 
   useEffect(() => {
     carregarLista();
   }, [tipo, filtroNome]);
-
 
   function excluirPessoa(id) {
     const dao = tipo === "PF" ? pfDAO : pjDAO;
@@ -45,10 +38,17 @@ export default function ListaPessoas() {
     carregarLista();
   }
 
-
   const colunas = [
-    { title: "Nome", dataIndex: "nome", key: "nome" },
-    { title: "Email", dataIndex: "email", key: "email" },
+    {
+      title: "Nome",
+      dataIndex: "nome",
+      key: "nome",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
     {
       title: tipo === "PF" ? "CPF" : "CNPJ",
       dataIndex: tipo === "PF" ? "cpf" : "cnpj",
@@ -80,7 +80,6 @@ export default function ListaPessoas() {
     },
   ];
 
-
   return (
     <div
       style={{
@@ -95,7 +94,6 @@ export default function ListaPessoas() {
       <h2 style={{ textAlign: "center", marginBottom: 20 }}>
         Listagem de Pessoas
       </h2>
-
 
       <Space style={{ marginBottom: 20 }}>
         <Select
@@ -119,7 +117,6 @@ export default function ListaPessoas() {
         </Button>
       </Space>
 
-
       <Table
         dataSource={dados}
         columns={colunas}
@@ -129,3 +126,5 @@ export default function ListaPessoas() {
     </div>
   );
 }
+
+
