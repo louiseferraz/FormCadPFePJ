@@ -5,7 +5,7 @@ import PessoaForm from "../components/cadastrapessoa/PessoaFormOO.jsx";
 import ListaPessoas from "../components/listapessoas/ListaPessoas.jsx";
 import VisualizaPessoa from "../components/visualizapessoa/VisualizaPessoa.jsx";
 
-function AppRoutesV1() {
+function AppRoutes() {
   return (
     <Routes>
       {/* Todas as rotas dentro do layout principal */}
@@ -20,4 +20,4 @@ function AppRoutesV1() {
   );
 }
 
-export default AppRoutesV1;
+export default AppRoutes;

@@ -4,24 +4,20 @@ import { useParams, useNavigate } from "react-router-dom";
 import PFDAO from "../../objetos/dao/PFDAOLocalV2.mjs";
 import PJDAO from "../../objetos/dao/PJDAOLocalV2.mjs";
 
-
 export default function VisualizaPessoa() {
   const { tipo, id } = useParams();
   const navigate = useNavigate();
 
-
   const [pessoa, setPessoa] = useState(null);
-
 
   useEffect(() => {
     const dao = tipo === "PF" ? new PFDAO() : new PJDAO();
     const lista = dao.listar();
 
-
+    // 🔹 Busca unificada pelo ID
     const encontrada = lista.find((p) => p.id === id);
     if (encontrada) setPessoa(encontrada);
   }, [tipo, id]);
-
 
   if (!pessoa) {
     return (
@@ -33,7 +29,6 @@ export default function VisualizaPessoa() {
       </div>
     );
   }
-
 
   return (
     <div
@@ -56,14 +51,13 @@ export default function VisualizaPessoa() {
           <Descriptions.Item label="Nome">{pessoa.nome}</Descriptions.Item>
           <Descriptions.Item label="E-mail">{pessoa.email}</Descriptions.Item>
 
-
           {tipo === "PF" ? (
             <Descriptions.Item label="CPF">{pessoa.cpf}</Descriptions.Item>
           ) : (
             <Descriptions.Item label="CNPJ">{pessoa.cnpj}</Descriptions.Item>
           )}
 
-
+          {/* Endereço */}
           <Descriptions.Item label="Endereço">
             {pessoa.endereco?.logradouro}, {pessoa.endereco?.bairro} -{" "}
             {pessoa.endereco?.cidade}/{pessoa.endereco?.uf}
@@ -71,7 +65,7 @@ export default function VisualizaPessoa() {
             CEP: {pessoa.endereco?.cep} | Região: {pessoa.endereco?.regiao}
           </Descriptions.Item>
 
-
+          {/* Telefones */}
           <Descriptions.Item label="Telefones">
             {pessoa.telefones?.length > 0
               ? pessoa.telefones
@@ -80,22 +74,25 @@ export default function VisualizaPessoa() {
               : "Não informado"}
           </Descriptions.Item>
 
-
+          {/* Campos específicos */}
           {tipo === "PF" ? (
-            <Descriptions.Item label="Título Eleitoral">
-              {pessoa.titulo?.numero
-                ? `Nº ${pessoa.titulo.numero} - Zona ${pessoa.titulo.zona} / Seção ${pessoa.titulo.secao}`
-                : "Não informado"}
-            </Descriptions.Item>
+            <>
+              <Descriptions.Item label="Título Eleitoral">
+                {pessoa.titulo?.numero
+                  ? `Nº ${pessoa.titulo.numero} - Zona ${pessoa.titulo.zona} / Seção ${pessoa.titulo.secao}`
+                  : "Não informado"}
+              </Descriptions.Item>
+            </>
           ) : (
-            <Descriptions.Item label="Inscrição Estadual">
-              {pessoa.ie?.numero
-                ? `Nº ${pessoa.ie.numero} - ${pessoa.ie.estado} (${pessoa.ie.dataRegistro})`
-                : "Não informado"}
-            </Descriptions.Item>
+            <>
+              <Descriptions.Item label="Inscrição Estadual">
+                {pessoa.ie?.numero
+                  ? `Nº ${pessoa.ie.numero} - ${pessoa.ie.estado} (${pessoa.ie.dataRegistro})`
+                  : "Não informado"}
+              </Descriptions.Item>
+            </>
           )}
         </Descriptions>
-
 
         <div style={{ textAlign: "center", marginTop: 24 }}>
           <Button

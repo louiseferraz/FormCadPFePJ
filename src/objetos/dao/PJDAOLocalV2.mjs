@@ -1,11 +1,9 @@
 import PJ from "../pessoas/PJ.mjs";
 
-
 export default class PJDAO {
   constructor() {
     this.chave = "pessoasJuridicas";
   }
-
 
   listar() {
     try {
@@ -17,18 +15,15 @@ export default class PJDAO {
     }
   }
 
-
   gerarId() {
     return Date.now().toString(36) + Math.random().toString(36).substring(2, 9);
   }
-
 
   toPlain(pj) {
     if (!pj) return {};
     const end = pj.getEndereco?.();
     const ie = pj.getIE?.();
     const telefones = pj.getTelefones?.() || [];
-
 
     return {
       id: pj.id ?? this.gerarId(),
@@ -59,33 +54,27 @@ export default class PJDAO {
     };
   }
 
-
   salvar(pj) {
     const lista = this.listar();
     const obj = this.toPlain(pj);
     if (!obj.id) obj.id = this.gerarId();
-
 
     lista.push(obj);
     localStorage.setItem(this.chave, JSON.stringify(lista));
     return obj;
   }
 
-
   atualizar(id, novoPJ) {
     const lista = this.listar();
     const obj = this.toPlain(novoPJ);
     obj.id = id;
 
-
     const idx = lista.findIndex((p) => p.id === id);
     if (idx >= 0) lista[idx] = obj;
     else lista.push(obj);
 
-
     localStorage.setItem(this.chave, JSON.stringify(lista));
   }
-
 
   excluir(id) {
     const novaLista = this.listar().filter((p) => p.id !== id);

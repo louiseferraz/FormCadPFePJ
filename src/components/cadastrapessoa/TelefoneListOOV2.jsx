@@ -1,50 +1,49 @@
+import React from "react";
 import { Form, Input, Button, Space } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
-export default function TelefoneListOOV2() {
+export default function TelefoneListOO({ form }) {
   return (
-    <Form.List name="telefones">
-      {(fields, { add, remove }) => (
-        <>
-          <Space align="baseline">
-            <Button type="dashed" onClick={() => add()} icon={<PlusOutlined />}>
-              Adicionar Telefone
-            </Button>
-          </Space>
+    <>
+      <h4 style={{ marginTop: 8 }}>Telefones</h4>
 
-          {fields.map(({ key, name, ...restField }) => (
-            <Space
-              key={key}
-              align="baseline"
-              style={{ display: "flex", marginTop: 8 }}
-            >
-              <Form.Item
-                {...restField}
-                name={[name, "ddd"]}
-                label="DDD"
-                rules={[{ required: true, message: "Informe o DDD!" }]}
+      <Form.List name="telefones">
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map(({ key, name, ...rest }) => (
+              <Space
+                key={key}
+                style={{ display: "flex", marginBottom: 8 }}
+                align="baseline"
               >
-                <Input placeholder="61" style={{ width: 80 }} />
-              </Form.Item>
+                <Form.Item
+                  {...rest}
+                  name={[name, "ddd"]}
+                  rules={[{ required: true, message: "DDD obrigatório" }]}
+                >
+                  <Input placeholder="DDD" style={{ width: 90 }} maxLength={2}/>
+                </Form.Item>
 
-              <Form.Item
-                {...restField}
-                name={[name, "numero"]}
-                label="Número"
-                rules={[{ required: true, message: "Informe o número!" }]}
-              >
-                <Input placeholder="99999-9999" style={{ width: 150 }} />
-              </Form.Item>
+                <Form.Item
+                  {...rest}
+                  name={[name, "numero"]}
+                  rules={[{ required: true, message: "Número obrigatório" }]}
+                >
+                  <Input placeholder="Número" style={{ width: 200 }} maxLength={9}/>
+                </Form.Item>
 
-              <MinusCircleOutlined
-                onClick={() => remove(name)}
-                style={{ color: "red" }}
-              />
-            </Space>
-          ))}
-        </>
-      )}
-    </Form.List>
+                <MinusCircleOutlined onClick={() => remove(name)} />
+              </Space>
+            ))}
+
+            <Form.Item>
+              <Button type="dashed" onClick={() => add()} icon={<PlusOutlined />} block>
+                Adicionar Telefone
+              </Button>
+            </Form.Item>
+          </>
+        )}
+      </Form.List>
+    </>
   );
 }
-
