@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "../layout/MainLayout.jsx";
-import PessoaForm from "../components/cadastrapessoa/PessoaFormOO.jsx";
-import ListaPessoas from "../components/listapessoas/ListaPessoas.jsx";
-import VisualizaPessoa from "../components/visualizapessoa/VisualizaPessoa.jsx";
+import PessoaForm from "../components/cadastrapessoa/PessoaFormOOV2.jsx";
+import ListaPessoas from "../components/listapessoas/ListaPessoasV2.jsx";
+import VisualizaPessoa from "../components/visualizapessoa/VisualizaPessoaV2.jsx";
 
-function AppRoutesV1() {
+function AppRoutes() {
   return (
     <Routes>
       {/* Todas as rotas dentro do layout principal */}
@@ -14,10 +14,10 @@ function AppRoutesV1() {
         <Route path="cadastrar"  element={<PessoaForm />} />
         <Route path="listar" element={<ListaPessoas />} />
         <Route path="visualizar/:tipo/:id" element={<VisualizaPessoa />} />
-        <Route path="atualizar/:tipo/:id" element={<VisualizaPessoa />} /> 
+        <Route path="editar/:tipo/:id" element={<PessoaForm />} /> 
       </Route>
     </Routes>
   );
 }
 
-export default AppRoutesV1;
+export default AppRoutes;
