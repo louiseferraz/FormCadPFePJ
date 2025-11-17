@@ -3,6 +3,7 @@ import Titulo from "./Titulo.mjs";
 
 export default class PF extends Pessoa {
   #cpf;
+  #dataNascimento;
   #titulo;
 
   setCPF(cpf) {
@@ -15,6 +16,18 @@ export default class PF extends Pessoa {
 
   getCPF() {
     return this.#cpf;
+  }
+
+  setdataNascimento(dataNascimento) {
+    if (dataNascimento) {
+      this.#dataNascimento = dataNascimento;
+      return true;
+    }
+    return false;
+  }
+
+  getDataDeNascimento() {
+    return this.#dataNascimento;
   }
 
   setTitulo(titulo) {
