@@ -71,6 +71,10 @@ export default function PessoaForm() {
 
         if (tipoParam === "PF") {
           valores.cpf = pessoa.cpf;
+          valores.dataNascimento =
+          pfObj.dataNascimento && pfObj.dataNascimento !== ""
+          ? dayjs(pfObj.dataNascimento)
+          : null,
           valores.titulo = pessoa.titulo || { numero: "", zona: "", secao: "" };
         } else {
           const ieObj = pessoa.ie || {};
@@ -146,6 +150,17 @@ useEffect(() => {
         pf.setCPF(values.cpf);
         pf.setEndereco(end);
 
+        if (values.dataNascimento) {
+        
+          const dn = values.dataNascimento;
+          const dataNascimento =
+            dn && typeof dn === "object" && typeof dn.format === "function"
+              ? dn.format("YYYY-MM-DD")
+              : dn || "";
+
+          pf.setdataNascimento(dataNascimento);
+        }
+        
         if (values.titulo) {
           const t = new Titulo();
           t.setNumero(values.titulo.numero);

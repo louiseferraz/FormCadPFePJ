@@ -1,1 +1,1 @@
-ARQUIVO "PF.mjs" dentro da pasta "pessoas" dentro da pasta "objetos" dentro da pasta "src".
+ARQUIVO "PessoaFormBack.mjs" dentro da pasta "cadastrapessoa" dentro da pasta "components" dentro da pasta "src".
